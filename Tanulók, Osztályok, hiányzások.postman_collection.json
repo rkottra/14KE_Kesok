@@ -1,0 +1,166 @@
+{
+	"info": {
+		"_postman_id": "cef571ce-7183-482f-8fd4-f1b1a893f5da",
+		"name": "Tanulók, Osztályok, hiányzások",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19581324"
+	},
+	"item": [
+		{
+			"name": "Összes osztály lekérdezése",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Jó-e az id az első rekordban?\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].id).to.eql(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Jó-e az osztály neve az első rekordban?\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].classname).to.eql(\"9. A\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Jó-e az id az utolsó rekordban?\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[24].id).to.eql(25);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Jó-e az osztály neve az első rekordban?\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[24].classname).to.eql(\"13. E\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/myclasses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"myclasses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Egyetlen osztály lekérdezése",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/myclasses/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"myclasses",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Osztály törlése",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/myclasses/10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"myclasses",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Új osztály felvétele",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "classname",
+							"value": "14. A",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/myclasses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"myclasses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Osztály módosítása",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "classname",
+							"value": "14. A",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/myclasses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"myclasses"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
