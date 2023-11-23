@@ -13,7 +13,7 @@ class MyClassController extends Controller
      */
     public function index()
     {
-        return MyClass::get();
+        return MyClass::with("mystudents")->get();
     }
 
     /**
@@ -31,7 +31,9 @@ class MyClassController extends Controller
      */
     public function show(MyClass $myclass)
     {
-        return $myclass;
+        return MyClass::where("id", $myclass->id)
+                        ->with("mystudents")
+                        ->get();
     }
 
 
@@ -42,6 +44,7 @@ class MyClassController extends Controller
     {
         $myclass->classname = $request->classname;
         $myclass->save();
+        
         return $myclass;
     }
 

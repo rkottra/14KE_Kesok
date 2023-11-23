@@ -36,3 +36,6 @@ Route::get("myclasses/{myclass}", [MyClassController::class, "show"]);
 
 use App\Http\Controllers\MyClassController;
 Route::resource("myclasses", MyClassController::class)->except(['create', 'edit']);
+
+use App\Http\Controllers\MyStudentController;
+Route::resource("mystudents", MyStudentController::class)->except(['create', 'edit']);
