@@ -14,6 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+use App\Http\Controllers\AuthController;
+Route::controller(AuthController::class)->group(function () {
+    Route::post('/', 'register');
+    Route::post('/login', 'login');
+    Route::middleware('auth:sanctum')->post('/logout', 'logout');
+});
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -38,4 +45,4 @@ use App\Http\Controllers\MyClassController;
 Route::resource("myclasses", MyClassController::class)->except(['create', 'edit']);
 
 use App\Http\Controllers\MyStudentController;
-Route::resource("mystudents", MyStudentController::class)->except(['create', 'edit']);
+Route::middleware('auth:sanctum')->resource("mystudents", MyStudentController::class)->except(['create', 'edit']);
