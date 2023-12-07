@@ -45,4 +45,8 @@ use App\Http\Controllers\MyClassController;
 Route::resource("myclasses", MyClassController::class)->except(['create', 'edit']);
 
 use App\Http\Controllers\MyStudentController;
-Route::middleware('auth:sanctum')->resource("mystudents", MyStudentController::class)->except(['create', 'edit']);
+Route::middleware([
+    //'auth:sanctum',
+    'jogosult:admin',
+    ])->resource("mystudents", MyStudentController::class)
+      ->except(['create', 'edit']);
